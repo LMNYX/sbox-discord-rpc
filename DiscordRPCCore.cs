@@ -16,12 +16,6 @@ namespace DiscordRPC
 		/// Refer to <see href="https://discord.com/developers/docs/topics/rpc#rpc-rpc-versions">Discord RPC documentation</see> in order to know which verison is present.
 		/// </summary>
 		public readonly static short Version = 1;
-
-		/// <summary>
-		/// Discord Application ID
-		/// Use <see href="https://discord.com/developers/applications">Discord Developers Portal</see> to create and obtain it.
-		/// </summary>
-		public readonly static long ClientID;
 		
 		/// <summary>
 		/// Generates a random UUID string for Discord RPC payloads.
