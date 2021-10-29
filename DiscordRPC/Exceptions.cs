@@ -39,11 +39,11 @@ namespace DiscordRPC
 			}
 
 			[Serializable]
-			public class UninstallFaled : Exception
+			public class UninstallFailed : Exception
 			{
-				public UninstallFaled() { }
-				public UninstallFaled( string message ) : base( message ) { }
-				public UninstallFaled( string message, Exception innerException ) : base( message, innerException ) { }
+				public UninstallFailed() { }
+				public UninstallFailed( string message ) : base( message ) { }
+				public UninstallFailed( string message, Exception innerException ) : base( message, innerException ) { }
 			}
 
 			[Serializable]
