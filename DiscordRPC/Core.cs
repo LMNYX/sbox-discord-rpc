@@ -1,36 +1,9 @@
-﻿using Sandbox;
-
-namespace DiscordRPC
+﻿namespace DiscordRPC
 {
-	/// <summary>
-	/// Methods and fields that are mostly for internal use.
-	/// </summary>
-	public static class Utility
-	{
-		/// <summary>
-		/// According to the <see href="https://discord.com/developers/docs/topics/rpc#rpc-server-ports">Discord RPC documentation</see> port range is [6463..6472].
-		/// </summary>
-		public readonly static short[] PossiblePorts = { 6463, 6464, 6465, 6466, 6467, 6468, 6469, 6470, 6471, 6472 };
-
-		/// <summary>
-		/// Refer to <see href="https://discord.com/developers/docs/topics/rpc#rpc-rpc-versions">Discord RPC documentation</see> in order to know which verison is present.
-		/// </summary>
-		public readonly static short Version = 1;
-		
-		/// <summary>
-		/// Generates a random UUID string for Discord RPC payloads.
-		/// </summary>
-		/// <returns>Random UUID string</returns>
-		public static string GetNonce()
-		{
-			return System.Guid.NewGuid().ToString( "B" )[1..^1];
-		}
-	}
-
 	public class Core
 	{
 		/// <summary>
-		/// Discord RPC command enum, used in creating payload (<see cref="DiscordRPC.Core.Payload"/>)
+		/// Discord RPC command enum, used in creating payload (<see cref="Payload"/>)
 		/// <para>Reference: <see href="https://discord.com/developers/docs/topics/rpc#commands-and-events-rpc-commands"/></para>
 		/// </summary>
 		public enum Command
@@ -83,16 +56,16 @@ namespace DiscordRPC
 
 		/// <summary>
 		/// Structure of command sent to the Discord RPC in order to perform action. <br/>
-		/// Field nonce must be unique randomly generated string. Recommended to use <see cref="DiscordRPC.Utility.GetNonce"/>.
+		/// Field nonce must be unique randomly generated string. Recommended to use <see cref="Utility.GetNonce"/>.
 		/// <para>Reference: <see href="https://discord.com/developers/docs/topics/rpc#payloads"/></para>
 		/// </summary>
 		public struct Payload
 		{
-			Command cmd;
-			string nonce;
-			RPCEvent evt;
-			object data;
-			object args;
+			public Command cmd;
+			public string nonce;
+			public RPCEvent evt;
+			public object data;
+			public object args;
 		}
 	}
 }
