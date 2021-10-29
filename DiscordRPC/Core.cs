@@ -1,4 +1,8 @@
-﻿namespace DiscordRPC
+﻿using Sandbox;
+using System;
+using System.Text.Json;
+
+namespace DiscordRPC
 {
 	public class Core
 	{
@@ -66,6 +70,62 @@
 			public RPCEvent evt;
 			public object data;
 			public object args;
+		}
+
+		private static WebSocket webSocket;
+
+		public async static void Connect( string endpoint )
+		{
+			if ( string.IsNullOrEmpty( endpoint ) )
+			{
+				throw new ArgumentNullException( nameof( endpoint ) );
+			}
+
+			if ( webSocket != null )
+			{
+				throw new InvalidOperationException( "Already connected to a server" );
+			}
+
+			webSocket = new WebSocket();
+			webSocket.OnMessageReceived += OnSocketMessageReceived;
+			webSocket.OnDisconnected += OnSocketDisconnected;
+
+			try
+			{
+				await webSocket.Connect( $"ws://{endpoint}?v={Utility.Version}&client_id={Configuration.ClientID}&encoding=json" );
+			}
+			catch ( Exception e )
+			{
+				Disconnect();
+				Log.Error( e, $"Failed to connect to server: {e}" );
+			}
+		}
+
+		public static void Send( Payload payload )
+		{
+			webSocket.Send( JsonSerializer.Serialize( payload ) );
+		}
+
+		private static void OnSocketMessageReceived( string message )
+		{
+			Log.Info( $"Message received: {message}" );
+		}
+
+		private static void OnSocketDisconnected( int status, string reason )
+		{
+			Log.Info( $"Disconnected: {status} {reason}" );
+			Disconnect();
+		}
+
+		public static void Disconnect()
+		{
+			webSocket?.Dispose();
+			webSocket = null;
+		}
+
+		public static void Shutdown()
+		{
+			Disconnect();
 		}
 	}
 }

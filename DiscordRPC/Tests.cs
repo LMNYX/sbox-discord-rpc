@@ -15,5 +15,17 @@ namespace DiscordRPC
 		{
 			throw new DiscordException.Dispatch.PanicExclamationMark( "This is a test!" );
 		}
+
+		[ClientCmd( "drpc_tests_connect" )]
+		public static void TestConnect()
+		{
+			Core.Connect( "localhost:6463" );
+		}
+
+		[ClientCmd( "drpc_tests_disconnect" )]
+		public static void TestDisconnect()
+		{
+			Core.Disconnect();
+		}
 	}
 }
