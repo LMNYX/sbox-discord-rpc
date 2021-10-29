@@ -8,7 +8,7 @@ namespace DiscordRPC
 	public static class Utility
 	{
 		/// <summary>
-		/// Accordging to the <see href="https://discord.com/developers/docs/topics/rpc#rpc-server-ports">Discord RPC documentation</see> port range is [6463..6472].
+		/// According to the <see href="https://discord.com/developers/docs/topics/rpc#rpc-server-ports">Discord RPC documentation</see> port range is [6463..6472].
 		/// </summary>
 		public readonly static short[] PossiblePorts = { 6463, 6464, 6465, 6466, 6467, 6468, 6469, 6470, 6471, 6472 };
 
